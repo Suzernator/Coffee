@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ViewAllItemsServlet
+ * Servlet implementation class AddItemsForOrderServlet
  */
-@WebServlet("/viewAllItemsServlet")
-public class ViewAllItemsServlet extends HttpServlet {
+@WebServlet("/addItemsForOrderServlet")
+public class AddItemsForOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAllItemsServlet() {
+    public AddItemsForOrderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +29,15 @@ public class ViewAllItemsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		OrderHelper dao = new OrderHelper();
 		
-		request.setAttribute("allItems", dao.showAllDrinks());
+		request.setAttribute("allDrinks", dao.showAllDrinks());
 		
-		String path = "/order-list.jsp";
-		
-		if(dao.showAllDrinks().isEmpty()) {
-			path = "/index.html";
+		if (dao.showAllDrinks().isEmpty()) {
+			request.setAttribute("allDrinks", " ");
 		}
 		
-		getServletContext().getRequestDispatcher(path).forward(request, response);
+		getServletContext().getRequestDispatcher("/new-order.jsp").forward(request, response);
+		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

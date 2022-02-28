@@ -1,23 +1,27 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.OrderDetails;
+
 /**
- * Servlet implementation class ViewAllItemsServlet
+ * Servlet implementation class ViewAllOrdersServlet
  */
-@WebServlet("/viewAllItemsServlet")
-public class ViewAllItemsServlet extends HttpServlet {
+@WebServlet("/viewAllOrdersServlet")
+public class ViewAllOrdersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAllItemsServlet() {
+    public ViewAllOrdersServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,17 +31,17 @@ public class ViewAllItemsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		OrderHelper dao = new OrderHelper();
+		OrderDetailsHelper coh = new OrderDetailsHelper();
+		List<OrderDetails> java = coh.getOrders();
+		request.setAttribute("allOrders", java);
 		
-		request.setAttribute("allItems", dao.showAllDrinks());
-		
-		String path = "/order-list.jsp";
-		
-		if(dao.showAllDrinks().isEmpty()) {
-			path = "/index.html";
+		if(java.isEmpty() ) {
+			request.setAttribute("allOrders", " ");
 		}
 		
-		getServletContext().getRequestDispatcher(path).forward(request, response);
+		getServletContext().getRequestDispatcher("/order-list-by-customer.jsp").forward(request, response);
+		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

@@ -27,10 +27,10 @@ public class OrderHelper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<OrderList> showAllItems(){
+	public List<OrderList> showAllDrinks(){
 		EntityManager em = emfactory.createEntityManager();
-		List<OrderList> allItems = em.createQuery("select i from OrderList i").getResultList();
-		return allItems;
+		List<OrderList> allDrinks = em.createQuery("select i from OrderList i").getResultList();
+		return allDrinks;
 	}
 	
 	public void deleteItem(OrderList toDelete) {

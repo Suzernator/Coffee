@@ -26,14 +26,17 @@ public class OrderList {
 	
 	public OrderList() {
 		//default, no-arg constructor
+		super();
 	}
 	
 	public OrderList(String name, String drink) {
+		super();
 		this.name = name;
 		this.drink = drink;
 	}
 		
 	public OrderList(int number, String name, String drink) {
+		super();
 		this.number = number;
 		this.name = name;
 		this.drink = drink;

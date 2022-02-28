@@ -129,7 +129,7 @@ public class StartProgram {
 		}
 
 		private static void viewTheList() {
-			List<OrderList>allItems = oh.showAllItems();
+			List<OrderList>allItems = oh.showAllDrinks();
 			
 			for(OrderList singleItem : allItems) {
 				System.out.println(singleItem.returnCoffeeOrder());
